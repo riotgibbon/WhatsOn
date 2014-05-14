@@ -15,6 +15,6 @@ describe("tests on request keys", function() {
 
 describe("framework test", function() {
     it("tests test framework", function() {
-        expect(true).toBe(false);
+        expect(true).toBe(true);
     });
 })
