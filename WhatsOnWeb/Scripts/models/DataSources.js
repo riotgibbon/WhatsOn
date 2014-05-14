@@ -1,5 +1,8 @@
 ﻿function DataSources(){}
 
+DataSources.requestKeys = function() {
+    return DataSources.range("a", "z");
+};
 
 DataSources.range = function (first, last) {
     var requestKeys = [];
