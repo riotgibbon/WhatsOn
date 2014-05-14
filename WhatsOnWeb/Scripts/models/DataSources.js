@@ -1,7 +1,10 @@
 ﻿function DataSources(){}
 
 
-DataSources.getRequestKeys = function () {
-    var requestKeys = new Array(26);
+DataSources.range = function (first, last) {
+    var requestKeys = [];
+    for (var idx = first.charCodeAt(0), end = last.charCodeAt(0) ; idx <= end; ++idx) {
+        requestKeys.push(String.fromCharCode(idx));
+    }
     return requestKeys;
 };
