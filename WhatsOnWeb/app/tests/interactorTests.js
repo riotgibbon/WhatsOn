@@ -24,7 +24,11 @@ describe("Data source request formatting", function() {
     });
 });
 
-describe("Mock json response parsing", function () {
+describe("map json response to entity", function() {
+    
+});
+
+describe("Mock json response parsing to confirm required values are present", function () {
     var mockV1 = JSON.parse(mockV1JSONFull);
     it("should be version '1.0", function () {
         expect(mockV1.version).toBe("1.0");

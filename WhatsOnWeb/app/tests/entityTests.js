@@ -1,5 +1,6 @@
 ﻿/// <reference path="../../lib/jasmine/jasmine.js" />
 /// <reference path="../entities/requestModel.js" />
+/// <reference path="../entities/programme.js" />
 
 
 describe("Request model", function () {
@@ -65,4 +66,20 @@ describe("Request model", function () {
         });
     });
 
+});
+
+describe("Programme", function() {
+
+    describe("create Programme 'foo' with image 'bar'", function () {
+        var params = { title: 'foo', image: 'bar' };
+        
+        var thisProgramme = programme(params);
+        it("should have title 'foo'", function() {
+            expect(thisProgramme.title()).toBe("foo");
+        });
+        
+        it("should have image 'bar'", function () {
+            expect(thisProgramme.image()).toBe("bar");
+        });
+    });
 });
