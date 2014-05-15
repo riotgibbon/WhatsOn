@@ -1,5 +1,7 @@
-﻿/// <reference path="../Scripts/jasmine.js" />
-/// <reference path="../Scripts/application/DataSources.js" />
+﻿/// <reference path="../../lib/jasmine/jasmine.js" />
+/// <reference path="../interactors/DataSources.js" />
+
+
 
 describe("range utility function to create sequential array of characters", function() {
 

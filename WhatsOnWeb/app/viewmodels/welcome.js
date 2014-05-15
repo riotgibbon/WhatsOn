@@ -1,7 +1,7 @@
 ﻿define(function() {
     var ctor = function () {
-        this.displayName = 'Welcome to the Programme Guide';
-        this.description = 'Programme Guide finds your favourite programmes!';
+        this.displayName = 'What\'s on';
+        this.description = 'Find out when your favourite programmes are on!';
         this.features = [
             'Clean MV* Architecture',
             'JS & HTML Modularity',

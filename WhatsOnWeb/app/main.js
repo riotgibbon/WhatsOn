@@ -21,7 +21,7 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator'],  function (s
     system.debug(true);
     //>>excludeEnd("build");
 
-    app.title = 'Programme Guide';
+    app.title = 'What\'s On';
 
     app.configurePlugins({
         router:true,
