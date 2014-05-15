@@ -29,6 +29,19 @@ describe("Request model", function () {
             expect(thisRequestModel.size()).toBe(15);
         });
     });
+    
+    describe("when supplied parameters  page:'7', size:'22' as strings, not numbers", function () {
+        var params = { page: '7', size: '22' };
+        var thisRequestModel = requestModel(params);
+       
+        it("page 7", function () {
+            expect(thisRequestModel.page()).toBe(7);
+        });
+        it("size 2", function () {
+            expect(thisRequestModel.size()).toBe(22);
+        });
+    });
+
 
     describe("when supplied non-number page and size values", function() {
         var params = {  page: "five", size: "size" };
@@ -40,4 +53,16 @@ describe("Request model", function () {
             expect(thisRequestModel.size()).toBe(20);
         });
     });
+    
+    describe("when supplied 0 or negative page and size values", function () {
+        var params = { page: -5, size: 0 };
+        var thisRequestModel = requestModel(params);
+        it("default to page 1", function () {
+            expect(thisRequestModel.page()).toBe(1);
+        });
+        it("default to size 20", function () {
+            expect(thisRequestModel.size()).toBe(20);
+        });
+    });
+
 });

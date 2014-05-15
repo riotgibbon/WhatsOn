@@ -8,10 +8,9 @@
     values.size = getNumberFromParam(checkedParams.size , 20); //could do number check here
 
     function getNumberFromParam(value, defaultValue) {
-        if (isNaN(value)) return defaultValue;
-        return value || defaultValue;
+        if (isNaN(value) || value<1) return defaultValue;
+        return parseInt( value || defaultValue);
     }
-
   
     that.letter = function() { return values.letter; };
     that.page = function() { return values.page; };
