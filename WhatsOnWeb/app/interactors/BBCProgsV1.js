@@ -1,8 +1,8 @@
 ﻿
 
-var bbcProgsV1 = function (requestModel) {
+var bbcProgsV1 = function () {
     var that = {};
-    that.getUri = function () {
+    that.getUri = function (requestModel) {
         var apiKey = getAPIKey();
         return "http://data.bbc.co.uk/ibl/v1/atoz/" + requestModel.letter() + "/programmes?rights=web&page=" + requestModel.page() + "&per_page=" + requestModel.size() + "&initial_child_count=0&sort=title&sort_direction=asc&availability=available&api_key=" + apiKey;
     };
