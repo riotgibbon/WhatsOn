@@ -1,5 +1,5 @@
 ﻿/// <reference path="../Scripts/jasmine.js" />
-/// <reference path="../Scripts/models/DataSources.js" />
+/// <reference path="../Scripts/application/DataSources.js" />
 
 describe("range utility function to create sequential array of characters", function() {
 
@@ -8,6 +8,12 @@ describe("range utility function to create sequential array of characters", func
         var range = DataSources.range("A", "J");
         expect(range.length).toBe(10);
         expect(range[4]).toBe("E");
+    });
+    
+    it("will return 10 characters 0-9", function () {
+        var range = DataSources.range("0", "9");
+        expect(range.length).toBe(10);
+        expect(range[3]).toBe("3");
     });
 
     describe("specialised requestKeys - returns a-z", function () {
