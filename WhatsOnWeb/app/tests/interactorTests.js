@@ -24,8 +24,29 @@ describe("Data source request formatting", function() {
     });
 });
 
-describe("map json response to entity", function() {
+describe("mapping json response to responseModel", function() {
+    var mockV1 = JSON.parse(mockV1JSONFull);
+    var bbc = bbcProgsV1({});
+    var mappedResponseModel = bbc.mapToResponseModel(mockV1);
+    it("should be pageSize of 20", function () {
+        expect(mappedResponseModel.pageSize()).toBe(20);
+    });
+    it("should have a total of 39 programmes available", function() {
+        expect(mappedResponseModel.totalItems()).toBe(39);
+    });
+    it("should have 'a' as the requested search letter", function () {
+        expect(mappedResponseModel.letter()).toBe('a');
+    });
+    it("should contain 20 programmes", function () {
+        expect(mappedResponseModel.programmes().length).toBe(20);
+    });
     
+    it("should have 'A City Crowned with Green' as its first programme ", function () {
+        expect(mappedResponseModel.programmes()[0].title()).toBe("A City Crowned with Green");
+    });
+    it("should have correct uri for image ", function () {
+        expect(mappedResponseModel.programmes()[0].image()).toBe("http://ichef.bbci.co.uk/images/ic/{recipe}/p01hhrgb.jpg");
+    });
 });
 
 describe("Mock json response parsing to confirm required values are present", function () {

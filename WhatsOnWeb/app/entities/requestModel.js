@@ -1,4 +1,5 @@
 ﻿/// <reference path="../interactors/DataSources.js" />
+/// <reference path="responseModel.js" />
 
 var requestModel = function (params) {
     

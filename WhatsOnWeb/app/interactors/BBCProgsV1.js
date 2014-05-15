@@ -1,10 +1,24 @@
-﻿var bbcProgsV1 = function(requestModel) {
+﻿
+
+var bbcProgsV1 = function (requestModel) {
     var that = {};
     that.getUri = function () {
-        
         var apiKey = getAPIKey();
-        
         return "http://data.bbc.co.uk/ibl/v1/atoz/" + requestModel.letter() + "/programmes?rights=web&page=" + requestModel.page() + "&per_page=" + requestModel.size() + "&initial_child_count=0&sort=title&sort_direction=asc&availability=available&api_key=" + apiKey;
+    };
+
+    that.mapToResponseModel = function (response) {
+        var programmes = [];
+        for (var i = 0; i < response.atoz_programmes.elements.length; i++) {
+            var element = response.atoz_programmes.elements[i];
+            programmes.push(programme({ title: element.title, image: element.images.standard }));
+        }
+        return responseModel({
+            pageSize: response.atoz_programmes.per_page,
+            totalItems: response.atoz_programmes.count,
+            programmes:programmes,
+            letter: response.atoz_programmes.character
+        });
     };
     
     //better ways than this, best to keep secrets on the serverside. Belongs here though, key will/should be specific to 
