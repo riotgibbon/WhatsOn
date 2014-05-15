@@ -7,6 +7,8 @@ var bbcProgsV1 = function () {
         return "http://data.bbc.co.uk/ibl/v1/atoz/" + requestModel.letter() + "/programmes?rights=web&page=" + requestModel.page() + "&per_page=" + requestModel.size() + "&initial_child_count=0&sort=title&sort_direction=asc&availability=available&api_key=" + apiKey;
     };
 
+    that.getName = function() { return "BBC v1"; };
+
     that.mapToResponseModel = function (response) {
         var programmes = [];
         for (var i = 0; i < response.atoz_programmes.elements.length; i++) {
