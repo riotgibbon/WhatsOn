@@ -1,6 +1,6 @@
 ﻿define(function() {
     var ctor = function () {
-        this.displayName = 'Jasmine tests';
+        this.displayName = 'Notes';
      /*  
         this.description = 'Durandal is a cross-device, cross-platform client framework written in JavaScript and designed to make Single Page Applications (SPAs) easy to create and maintain.';
         this.features = [

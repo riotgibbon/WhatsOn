@@ -1,0 +1,49 @@
+﻿
+<h2 data-bind="html:displayName"></h2>
+
+<h3>Security</h3>
+The API key should be secured, preferably via a server-side request. This sample is pure JavaScript, so I have not implemented that aspect
+
+<h3>Images</h3>
+Images are returned in the JSON response with a "{recipe}" placeholder, eg:<br/>
+http://ichef.bbci.co.uk/images/ic/{recipe}/p01l9hqy.jpg <br /><br />
+This refers to the image size, with the following options (derived from <a href="http://tinyurl.com/ks9whuq">here</a> )
+<ul>
+   <li>640×360</li> 
+    <li>
+        640×360
+    </li> 
+    
+    <li>
+        544×306
+    </li> 
+    <li>
+        480×270
+    </li> 
+    <li>
+        368×207
+    </li> 
+    <li>
+        336×189
+    </li> 
+    <li>
+        272×153
+    </li> 
+    <li>
+        256×144
+    <li>
+        192×108
+    </li> 
+    <li>
+        160×90
+    </li> 
+    <li>
+        128×72
+    </li> 
+    <li>
+        126×71
+    <li>
+        120×68
+    </li> 
+    <li>  96×54</li> 
+</ul>
