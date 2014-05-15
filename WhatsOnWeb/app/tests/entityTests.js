@@ -88,11 +88,21 @@ describe("Entities", function() {
     });
 
     describe("responseModel", function() {
-
+        describe("if passed 2 programmes, first title 'foo' ", function () {
+            var programmes = [programme({ title: "foo" }), programme({ title: "bar" })];
+            var params = { programmes: programmes };
+            var thisResponseModel = responseModel(params);
+            it("both programmes will be available", function () {
+                expect(thisResponseModel.programmes().length).toBe(2);
+            });
+            it("then first title will be 'foo'", function () {
+                expect(thisResponseModel.programmes()[0].title()).toBe("foo");
+            });
+        });
         describe("if passed expected 47 total items with page size of 15 ", function () {
             var params = { totalItems: 47, pageSize: 15 };
             var thisResponseModel = responseModel(params);
-            it("should have offer 4 pages", function () {
+            it("should offer 4 pages", function () {
                 expect(thisResponseModel.pageNumbers().length).toBe(4);
             });
             it("should have first page value '1'", function () {
@@ -103,11 +113,19 @@ describe("Entities", function() {
                 expect(thisResponseModel.pageNumbers()[3]).toBe("4");
             });
         });
+
+        describe("if not passed programmes", function() {
+            var params = { totalItems: 47, pageSize: 15 };
+            var thisResponseModel = responseModel(params);
+            it("programmes length will empty", function() {
+                expect(thisResponseModel.programmes().length).toBe(0);
+            });
+        });
         
         describe("if passed expected 22 total items with page size of 9 ", function () {
             var params = { totalItems: 22, pageSize: 9 };
             var thisResponseModel = responseModel(params);
-            it("should have offer 3 pages", function () {
+            it("should offer 3 pages", function () {
                 expect(thisResponseModel.pageNumbers().length).toBe(3);
             });
             it("should have first pageNumber value '1'", function () {
@@ -122,7 +140,7 @@ describe("Entities", function() {
         describe("if passed expected 15 total items with page size of 30 ", function () {
             var params = { totalItems: 15, pageSize: 20 };
             var thisResponseModel = responseModel(params);
-            it("should have offer 1 page", function () {
+            it("should offer only 1 page", function () {
                 expect(thisResponseModel.pageNumbers().length).toBe(1);
             });
             it("should have first pageNumber value '1'", function () {

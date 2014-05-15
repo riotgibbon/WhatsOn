@@ -7,11 +7,13 @@ var responseModel = function (params) {
     
     values.totalItems = DataSources.getNumberFromParam(checkedParams.totalItems, 0);
     values.pageSize = DataSources.getNumberFromParam(checkedParams.pageSize, 0);
-
+    values.programmes = checkedParams.programmes||[];
 
     that.pageNumbers = function () {
         return DataSources.range("1", highestPage());
     };
+
+    that.programmes = function() { return values.programmes; };
     
     function highestPage() {
         if (values.totalItems < values.pageSize) return "1";
