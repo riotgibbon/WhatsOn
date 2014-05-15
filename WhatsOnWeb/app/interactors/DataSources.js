@@ -11,3 +11,8 @@ DataSources.range = function (first, last) {
     }
     return requestKeys;
 };
+
+DataSources.getNumberFromParam = function(value, defaultValue) {
+    if (isNaN(value) || value < 1) return defaultValue;
+    return parseInt(value || defaultValue);
+}

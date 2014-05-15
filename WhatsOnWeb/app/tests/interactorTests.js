@@ -49,6 +49,10 @@ describe("Mock json response parsing to confirm required values are present", fu
         expect(mockV1.atoz_programmes.count).toBe(39);
     });
     
+    it("should expect 20 programmes per page", function () {
+        expect(mockV1.atoz_programmes.per_page).toBe(20);
+    });
+
     it("should have returned 20 programmes", function () {
         expect(mockV1.atoz_programmes.elements.length).toBe(20);
     });
