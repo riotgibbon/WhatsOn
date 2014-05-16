@@ -1,4 +1,5 @@
-﻿function DataSources(){}
+﻿
+function DataSources() { }
 
 DataSources.requestKeys = function() {
     return DataSources.range("a", "z");
@@ -15,4 +16,12 @@ DataSources.range = function (first, last) {
 DataSources.getNumberFromParam = function(value, defaultValue) {
     if (isNaN(value) || value < 1) return defaultValue;
     return parseInt(value || defaultValue);
-}
+};
+
+define("datasources", function (require) {
+    return {
+        requestKeys: DataSources.requestKeys,
+        range: DataSources.range,
+        getNumberFromParam: DataSources.getNumberFromParam
+    };
+});

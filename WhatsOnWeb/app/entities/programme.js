@@ -9,3 +9,7 @@
     that.image = function () { return values.image; };
     return that;
 }
+
+define("programme", function (require) {
+    return programme;
+});

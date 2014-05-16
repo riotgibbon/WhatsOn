@@ -7,3 +7,7 @@ var jqueryHttpClient = function () {
     };
     return that;
 };
+
+define("httpClient", function (require) {
+    return jqueryHttpClient;
+});

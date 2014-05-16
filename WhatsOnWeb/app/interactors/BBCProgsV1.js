@@ -29,3 +29,7 @@ var bbcProgsV1 = function () {
     };
     return that;
 }
+
+define("api", function (require) {
+    return bbcProgsV1;
+});

@@ -1,11 +1,9 @@
 ﻿/// <reference path="../../lib/jasmine/jasmine.js" />
 /// <reference path="../interactors/DataSources.js" />
-
+/// <reference path="../../lib/require/require.js" />
 
 
 describe("range utility function to create sequential array of characters", function() {
-
-
     it("will return 10 characters A-J", function() {
         var range = DataSources.range("A", "J");
         expect(range.length).toBe(10);

@@ -1,4 +1,5 @@
-﻿requirejs.config({
+﻿/// <reference path="interactors/DataSources.js" />
+requirejs.config({
     paths: {
         'text': '../lib/require/text',
         'durandal':'../lib/durandal/js',
@@ -6,7 +7,15 @@
         'transitions' : '../lib/durandal/js/transitions',
         'knockout': '../lib/knockout/knockout-2.3.0',
         'bootstrap': '../lib/bootstrap/js/bootstrap',
-        'jquery': '../lib/jquery/jquery-1.9.1'
+        'jquery': '../lib/jquery/jquery-1.9.1',
+        'datasources': 'interactors/DataSources',
+        'programmesInteractor': 'interactors/programmesInteractor',
+        'api': 'interactors/BBCProgsV1',
+        'httpClient': 'interactors/jqueryHttpClient',
+        'responseModel': 'entities/responseModel',
+        'requestModel': 'entities/requestModel',
+        'programme': 'entities/programme'
+        
     },
     shim: {
         'bootstrap': {

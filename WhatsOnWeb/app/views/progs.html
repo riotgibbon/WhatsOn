@@ -1,0 +1,39 @@
+﻿<section>
+    <h2 data-bind="html: displayName"></h2>
+    Selected letter: <span data-bind="html: selectedLetter"></span>
+    <div data-bind="html: apiSource"></div>
+    <div class="row-fluid">
+        <ul class="thumbnails" data-bind="foreach: letters">
+            <li>
+                <a href="#" data-bind="click:$parent.selectLetter">
+                    <span data-bind="text: $data"> </span>
+                </a>
+            </li>
+        </ul>
+        <ul class="thumbnails" data-bind="foreach: pageNumbers">
+            <li>
+                <a href="#" data-bind="click:$parent.selectPage">
+                    <span data-bind="text: $data"> </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <ul  data-bind="foreach: programmes">
+            <li>
+               
+                    <span data-bind="text: $data.title()"> </span>
+               
+            </li>
+        </ul> 
+    </div>
+    <div class="row-fluid">
+        <ul class="thumbnails" data-bind="foreach: images">
+            <li>
+                <a href="#" class="thumbnail" data-bind="click:$parent.select">
+                    <img style="width: 260px; height: 180px;" data-bind="attr: { src: media.m }" />
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
