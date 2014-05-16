@@ -1,6 +1,32 @@
 ﻿
 <h2 data-bind="html:displayName"></h2>
 
+<h3>Domain Design</h3>
+<p>
+    All domain objects are functions that follow the Module pattern as described in "JavaScript, The Good Parts" (Doug Crockford), to allow abstraction and testing of required functionality. This also allows implementation of the Open-Closed principle, as functions can be passed in as parameters, eg the API or HTTP request modules.
+    Objects are also made available through requirejs
+</p>
+<p>
+    core objects:
+    <ul>
+        <li>requestModel - all parameters for making a programme request, with defaults</li>
+        <li>responseModel - all data required for presentation (including calculated pagination), free of any dependencies</li>
+        <li>programme - just title and image, as specified</li>
+        <li>programmesInteractor - manages requests, uses functional form of dependency injection to select API and http selection.</li>
+        <li>BBCProgsV1 - v1 API specific client, builds uri and maps response. Format allows other programme listings APIs, eg v2, other channels</li>
+        <li>jqueryHttpClient - use $.getJSON to make request, easily mocked/switched.</li>
+    </ul>
+    <p>The httpClient can be easily be extended to use caching, but API performance was sufficent to not need it at this point.</p>
+    <p>I considered making programmesInteractor protocol independent, eg to use <a href="http://thrift.apache.org/">Apache Thrift</a> instead of HTTP Rest with JSON, but that's probably an abstraction too far at this point.</p>
+</p>
+
+<h3>Unit testing/continous delivery</h3>
+<a href="http://jasmine.github.io/">Jasmine</a> is used for testing all the core domain code.<a href="http://chutzpah.codeplex.com/">Auto-test feature</a>  in Visual Studio runs all tests on every save of every file.
+<a href="/app/tests/SpecRunner.html">SpecRunner.html</a> file also built in for browser based testing. Code checked into <a href="https://github.com/riotgibbon/WhatsOn">GitHub</a>, automatically deployed to <a href="http://progguide.azurewebsites.net/">Azure</a> hosting.
+
+<h3>Presentation Layer</h3>
+Durandal/Knockout used for UI, due to previous experience rather than "the best". UI here is just a consumer of the core services, rather than the core itself. Core development time was on services layer, rather than final presentation.
+
 <h3>Security</h3>
 The API key should be secured, preferably via a server-side request. This sample is pure JavaScript, so I have not implemented that aspect
 
