@@ -16,16 +16,16 @@ describe("range utility function to create sequential array of characters", func
         expect(range[3]).toBe("3");
     });
 
-    describe("specialised requestKeys - returns a-z", function () {
+    describe("specialised requestKeys - returns a-z, 0-9", function () {
         var requestKeys = DataSources.requestKeys();
-        it("should return an array of 26 items", function() {
-            expect(requestKeys.length).toBe(26);
+        it("should return an array of 36 items", function() {
+            expect(requestKeys.length).toBe(36);
         });
         it("first item should be 'a'", function() {
             expect(requestKeys[0]).toBe('a');
         });
-        it("first item should be 'z'", function() {
-            expect(requestKeys[25]).toBe('z');
+        it("first item should be '9'", function() {
+            expect(requestKeys[35]).toBe('9');
         });
     });
 });

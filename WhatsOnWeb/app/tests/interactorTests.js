@@ -10,10 +10,18 @@
 
 
 describe("Interactors", function () {
-    
-
     describe("programmesInteractor", function () {
-
+        var uriRequested, requestJsonResponseCalled;
+        var mockHttpClient = function () {
+            var that = {};
+            that.requestJsonResponse = function (uri, response) {
+                uriRequested = uri;
+                requestJsonResponseCalled = true;
+                response(mockV1JSON);//return static json
+            };
+            return that;
+        };
+        
         describe("calling mock API", function () {
             var mockAPI, getUriCalled, mappingCalled;
             var request = requestModel();
@@ -24,22 +32,11 @@ describe("Interactors", function () {
                         getUriCalled = true;
                         return uritocall;
                     };
-                    that.mapToResponseModel = function(response) {
-                        mappingCalled = true;
-                    };
+                    that.mapToResponseModel = function(response) {mappingCalled = true;};
                     return that;
                 };
            
-            var uriRequested, requestJsonResponseCalled;
-            var mockHttpClient = function() {
-                var that = {};
-                that.requestJsonResponse = function (uri, response) {
-                    uriRequested = uri;
-                    requestJsonResponseCalled = true;
-                    response(mockV1JSON);//return static json
-                };
-                return that;
-            };
+           
 
 
             var interaction = programmesInteractor({
@@ -47,9 +44,7 @@ describe("Interactors", function () {
                     httpClient: mockHttpClient
             });
             var responseCalled = false;
-            var mockResponseFunction = function(response) {
-                responseCalled = true;
-            };
+            var mockResponseFunction = function(response) {responseCalled = true;};
             interaction.requestProgrammes(request, mockResponseFunction);
             it("should call api getUri function", function () {
                 expect(getUriCalled).toBe(true);
@@ -73,12 +68,10 @@ describe("Interactors", function () {
 
         });
 
-
+       
 
         describe("calling BBC API with jQuery http client", function () {
             var request = requestModel();
-           
-            
             var interaction = programmesInteractor({ api: bbcProgsV1, httpClient: jqueryHttpClient });
             it("should have name BBC v1", function() {
                 expect(interaction.getApiName()).toBe("BBC v1");
@@ -96,7 +89,6 @@ describe("Interactors", function () {
             });
 
             it("default requestModel should match standard spec", function() {
-               
                 var expected = "http://data.bbc.co.uk/ibl/v1/atoz/a/programmes?rights=web&page=1&per_page=20&initial_child_count=0&sort=title&sort_direction=asc&availability=available&api_key=x01Hi6NYkTrv0bAdP4a0nd1cgoGvUNeF";
                 expect(bbc.getUri(requestModel())).toBe(expected);
             });
@@ -113,8 +105,8 @@ describe("Interactors", function () {
 
     describe("mapping json response to responseModel", function() {
         var mockV1 = JSON.parse(mockV1JSONFull);
-        var bbc = bbcProgsV1({});
-        var mappedResponseModel = bbc.mapToResponseModel(mockV1);
+        var bbc = bbcProgsV1();
+        var mappedResponseModel = bbc.mapToResponseModel({response: mockV1, imageSize:"160x90"});
         it("should be pageSize of 20", function() {
             expect(mappedResponseModel.pageSize()).toBe(20);
         });
@@ -131,8 +123,8 @@ describe("Interactors", function () {
         it("should have 'A City Crowned with Green' as its first programme ", function() {
             expect(mappedResponseModel.programmes()[0].title()).toBe("A City Crowned with Green");
         });
-        it("should have correct uri for image ", function() {
-            expect(mappedResponseModel.programmes()[0].image()).toBe("http://ichef.bbci.co.uk/images/ic/{recipe}/p01hhrgb.jpg");
+        it("should have correctly sized uri for image ", function() {
+            expect(mappedResponseModel.programmes()[0].image()).toBe("http://ichef.bbci.co.uk/images/ic/160x90/p01hhrgb.jpg");
         });
     });
 

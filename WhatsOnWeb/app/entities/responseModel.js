@@ -22,7 +22,7 @@ var responseModel = function(params) {
 
     function highestPage() {
         if (values.totalItems < values.pageSize) return "1";
-        return (Math.round((values.totalItems / values.pageSize) + 1)).toString();
+        return (Math.floor(values.totalItems / values.pageSize) + 1).toString();
     }
 
     return that;

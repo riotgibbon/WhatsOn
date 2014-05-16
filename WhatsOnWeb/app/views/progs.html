@@ -1,7 +1,7 @@
 ﻿<section>
     <h2 data-bind="html: displayName"></h2>
-    Selected letter: <span data-bind="html: selectedLetter"></span>
-    <div data-bind="html: apiSource"></div>
+    
+    <div>API: <span data-bind="html: apiSource"></span>, Selected letter: <span data-bind="html: selectedLetter"></span><br /></div>
     <div class="row-fluid">
         <ul class="thumbnails" data-bind="foreach: letters">
             <li>
@@ -10,29 +10,26 @@
                 </a>
             </li>
         </ul>
-        <ul class="thumbnails" data-bind="foreach: pageNumbers">
-            <li>
-                <a href="#" data-bind="click:$parent.selectPage">
-                    <span data-bind="text: $data"> </span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div>
-        <ul  data-bind="foreach: programmes">
-            <li>
-               
-                    <span data-bind="text: $data.title()"> </span>
-               
-            </li>
-        </ul> 
-    </div>
+        <div data-bind="if: pageNumbers().length>1">
+            Pages: 
+            <ul class="thumbnails" data-bind="foreach: pageNumbers">
+                <li>
+                    <a href="#" data-bind="click:$parent.selectPage">
+                        <span data-bind="text: $data"> </span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+        </div>
+
+   
     <div class="row-fluid">
-        <ul class="thumbnails" data-bind="foreach: images">
+        <ul class="thumbnails" data-bind="foreach: programmes">
             <li>
-                <a href="#" class="thumbnail" data-bind="click:$parent.select">
-                    <img style="width: 260px; height: 180px;" data-bind="attr: { src: media.m }" />
-                </a>
+                <span data-bind="text: $data.title()"> </span><br/>
+                <img  data-bind="attr: { src: $data.image()}" />
+                
             </li>
         </ul>
     </div>

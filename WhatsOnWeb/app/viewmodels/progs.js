@@ -1,22 +1,26 @@
-﻿define(['plugins/http', 'durandal/app', 'knockout', 'datasources', 'programmesInteractor', 'api', 'httpClient', 'requestModel'], function (http, app, ko, ds, pi, api, httpClient, requestModel) {
+﻿define(['plugins/http', 'durandal/app', 'knockout','viewmodels/shell',  'datasources', 'programmesInteractor', 'api', 'httpClient', 'requestModel'], function (http, app, ko, shell, ds, pi, api, httpClient, requestModel) {
     //Note: This module exports an object.
     //That means that every module that "requires" it will get the same object instance.
     //If you wish to be able to create multiple instances, instead export a function.
     //See the "welcome" module for an example of function export.
-    var selectedLetter = ko.observable('a');
+    var selectedLetter = ko.observable("a");
     var apiSource = ko.observable();
     var interactor = pi({ api: api, httpClient: httpClient });
     var programmes = ko.observableArray([]);
     var pageNumbers = ko.observableArray([]);
-    
-    var getProgrammes = function(letter, page) {
+   
+    var getProgrammes = function (letter, page) {
+        shell.showSplash(true);
+        programmes([]);
+        pageNumbers([]);
         var thisRequest = requestModel({ letter: letter, page: page });
-        interactor.requestProgrammes(thisRequest, function (responseModel) {
+        interactor.requestProgrammes(thisRequest, function(responseModel) {
             var count = responseModel.totalItems();
             programmes(responseModel.programmes());
             pageNumbers(responseModel.pageNumbers());
+            shell.showSplash(false);
         });
-    }
+    };
     return {
         displayName: 'Programmes',
         images: ko.observableArray([]),
@@ -27,6 +31,7 @@
         pageNumbers: pageNumbers,
         activate: function () {
             apiSource(interactor.getApiName());
+            getProgrammes(selectedLetter(), "1");
             //the router's activator calls this function and waits for it to complete before proceding
             if (this.images().length > 0) {
                 return;

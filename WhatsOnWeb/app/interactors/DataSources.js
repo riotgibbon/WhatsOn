@@ -2,7 +2,7 @@
 function DataSources() { }
 
 DataSources.requestKeys = function() {
-    return DataSources.range("a", "z");
+    return DataSources.range("a", "z").concat(DataSources.range("0", "9"));
 };
 
 DataSources.range = function (first, last) {
