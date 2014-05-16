@@ -5,7 +5,7 @@
         activate: function () {
             router.map([
                 { route: '', title:'Welcome', moduleId: 'viewmodels/welcome', nav: true },
-                { route: 'progs', moduleId: 'viewmodels/progs', nav: true },
+                { route: 'programmes', moduleId: 'viewmodels/progs', nav: true },
                 { route: 'notes', moduleId: 'viewmodels/notes', nav: true }
                
             ]).buildNavigationModel();

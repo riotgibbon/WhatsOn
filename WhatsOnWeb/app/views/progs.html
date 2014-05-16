@@ -7,7 +7,7 @@
     <div class="row-fluid">
         
         <div data-bind="if: pageNumbers().length>1">
-            Pages: 
+            <span> <span data-bind="html: pageNumbers().length" /> pages available: </span>
             <ul class="thumbnails" data-bind="foreach: pageNumbers">
                 <li>
                     <a href="#" data-bind="click:$parent.selectPage">

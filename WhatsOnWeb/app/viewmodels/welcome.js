@@ -1,7 +1,7 @@
 ﻿define(function() {
     var ctor = function () {
         this.displayName = 'What\'s on';
-        this.description = 'Sample programme guide for BBC TV content!';
+        this.description = 'Sample programme guide for BBC TV content! Click on "programmes" above to get started ...';
         this.features = [
             'fully unit tested, with external dependencies mocked',
             'all abstract domain data types, with no dependencies on external domain',

@@ -20,12 +20,28 @@
     <p>I considered making programmesInteractor protocol independent, eg to use <a href="http://thrift.apache.org/">Apache Thrift</a> instead of HTTP Rest with JSON, but that's probably an abstraction too far at this point.</p>
 </p>
 
+
+
 <h3>Unit testing/continous delivery</h3>
 <a href="http://jasmine.github.io/">Jasmine</a> is used for testing all the core domain code.<a href="http://chutzpah.codeplex.com/">Auto-test feature</a>  in Visual Studio runs all tests on every save of every file.
 <a href="/app/tests/SpecRunner.html">SpecRunner.html</a> file also built in for browser based testing. Code checked into <a href="https://github.com/riotgibbon/WhatsOn">GitHub</a>, automatically deployed to <a href="http://progguide.azurewebsites.net/">Azure</a> hosting.
 
 <h3>Presentation Layer</h3>
-Durandal/Knockout used for UI, due to previous experience rather than "the best". UI here is just a consumer of the core services, rather than the core itself. Core development time was on services layer, rather than final presentation.
+Durandal/Knockout used for UI, due to previous experience rather than "the best". UI here is just a consumer of the core services, rather than the core itself. Core development time was on services layer, rather than final presentation, but it follows the MVVM pattern.
+
+<h3>Error handling</h3>
+I wasn't able to access programmes beginning with numbers through the API, so chose to show an error box in the event of any failure.
+<pre>
+{
+    version: "1.0",
+    schema: "/ibl/v1/schema/ibl.json",
+    timestamp: "2014-05-16T11:19:28Z",
+    error: {
+        id: 7002,
+        details: "Parameter value [7] for parameter [initial_character] failed validation with [must match "[a-z]|(0-9)"]"
+    }
+}
+</pre>
 
 <h3>Security</h3>
 The API key should be secured, preferably via a server-side request. This sample is pure JavaScript, so I have not implemented that aspect
