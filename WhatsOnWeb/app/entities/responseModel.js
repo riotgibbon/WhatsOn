@@ -21,8 +21,8 @@ var responseModel = function(params) {
     that.letter = function() { return values.letter; };
 
     function highestPage() {
-        if (values.totalItems < values.pageSize) return "1";
-        return (Math.floor(values.totalItems / values.pageSize) + 1).toString();
+        var highest = Math.ceil(values.totalItems / values.pageSize);
+        return highest.toString();
     }
 
     return that;

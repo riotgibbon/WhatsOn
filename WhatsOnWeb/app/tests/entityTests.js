@@ -120,13 +120,43 @@ describe("Entities", function() {
             it("should offer 2 pages", function () {
                 expect(thisResponseModel.pageNumbers().length).toBe(2);
             });
+            
             it("should have final page value '2'", function () {
                 expect(thisResponseModel.pageNumbers()[thisResponseModel.pageNumbers().length - 1]).toBe("2");
             });
-
-           
         });
-
+        
+        describe("if passed expected 32 total items with page size of 20 ", function () {
+            var params = { totalItems: 32, pageSize: 20 };
+            var thisResponseModel = responseModel(params);
+            it("should offer 2 pages", function () {
+                expect(thisResponseModel.pageNumbers().length).toBe(2);
+            });
+            
+            it("should have final page value '2'", function () {
+                expect(thisResponseModel.pageNumbers()[thisResponseModel.pageNumbers().length - 1]).toBe("2");
+            });
+        });
+        
+        describe("if passed expected 20 total items with page size of 20 ", function () {
+            var params = { totalItems: 20, pageSize: 20 };
+            var thisResponseModel = responseModel(params);
+            it("should offer 1 pages", function () {
+                expect(thisResponseModel.pageNumbers().length).toBe(1);
+            });
+            it("should have final page value '1'", function () {
+                expect(thisResponseModel.pageNumbers()[thisResponseModel.pageNumbers().length - 1]).toBe("1");
+            });});
+        describe("if passed expected 40 total items with page size of 20 ", function () {
+            var params = { totalItems: 40, pageSize: 20 };
+            var thisResponseModel = responseModel(params);
+            it("should offer 2 pages", function () {
+                expect(thisResponseModel.pageNumbers().length).toBe(2);
+            });
+            it("should have final page value '2'", function () {
+                expect(thisResponseModel.pageNumbers()[thisResponseModel.pageNumbers().length - 1]).toBe("2");
+            });
+        });
         describe("if not passed programmes", function() {
             var params = { totalItems: 47, pageSize: 15 };
             var thisResponseModel = responseModel(params);

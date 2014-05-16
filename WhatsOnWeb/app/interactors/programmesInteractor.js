@@ -6,11 +6,15 @@
         return params.api().getName();
     };
 
-    that.requestProgrammes = function(requestModel, response) {
+    that.requestProgrammes = function(requestModel, successCallback, errorCallback) {
         var uri = params.api().getUri(requestModel);
-        params.httpClient().requestJsonResponse(uri, function(responseObject) {
+        params.httpClient().requestJsonResponse(uri, 
+            function (responseObject) {
             var mappedResponseObject = params.api().mapToResponseModel({ response: responseObject, imageSize: imageSize });
-            response(mappedResponseObject);
+            successCallback(mappedResponseObject);
+        }
+        , function(message) {
+            errorCallback(message);
         });
     };
     return that;

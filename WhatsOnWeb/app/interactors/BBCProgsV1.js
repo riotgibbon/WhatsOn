@@ -13,10 +13,12 @@ var bbcProgsV1 = function() {
         var response = params.response;
         var imageSize = params.imageSize;
         var programmes = [];
-        for (var i = 0; i < response.atoz_programmes.elements.length; i++) {
-            var element = response.atoz_programmes.elements[i];
-            var image = element.images.standard.replace("{recipe}", imageSize);
-            programmes.push(programme({ title: element.title, image: image }));
+        if (response.atoz_programmes != null) {
+            for (var i = 0; i < response.atoz_programmes.elements.length; i++) {
+                var element = response.atoz_programmes.elements[i];
+                var image = element.images.standard.replace("{recipe}", imageSize);
+                programmes.push(programme({ title: element.title, image: image }));
+            }
         }
         return responseModel({
             pageSize: response.atoz_programmes.per_page,

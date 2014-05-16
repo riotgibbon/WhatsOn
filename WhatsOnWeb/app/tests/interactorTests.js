@@ -36,9 +36,6 @@ describe("Interactors", function () {
                     return that;
                 };
            
-           
-
-
             var interaction = programmesInteractor({
                     api: mockAPI,
                     httpClient: mockHttpClient
@@ -69,6 +66,8 @@ describe("Interactors", function () {
         });
 
        
+
+
 
         describe("calling BBC API with jQuery http client", function () {
             var request = requestModel();

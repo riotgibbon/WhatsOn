@@ -2,8 +2,9 @@
 
 var jqueryHttpClient = function () {
     var that = {};
-    that.requestJsonResponse = function (uri, response) {
-        $.getJSON(uri, {}, response);
+    that.requestJsonResponse = function (uri, response,error) {
+        $.getJSON(uri, {}, response)
+            .error(function () { error("a problem occured"); });
     };
     return that;
 };

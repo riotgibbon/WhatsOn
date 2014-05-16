@@ -8,55 +8,50 @@
     var interactor = pi({ api: api, httpClient: httpClient });
     var programmes = ko.observableArray([]);
     var pageNumbers = ko.observableArray([]);
-   
-    var getProgrammes = function (letter, page) {
+    selectedLetter.subscribe(function (letter) {
+        selectedPage("1");
+        getProgrammes();
+    });
+    var selectedPage = ko.observable("1");
+    var getProgrammes = function () {
         shell.showSplash(true);
         programmes([]);
         pageNumbers([]);
-        var thisRequest = requestModel({ letter: letter, page: page });
-        interactor.requestProgrammes(thisRequest, function(responseModel) {
+        var thisRequest = requestModel({ letter: selectedLetter(), page: selectedPage() });
+        interactor.requestProgrammes(thisRequest,
+            function (responseModel) {
             var count = responseModel.totalItems();
             programmes(responseModel.programmes());
             pageNumbers(responseModel.pageNumbers());
             shell.showSplash(false);
-        });
+            },
+
+            function (errorMessage) {
+                shell.showSplash(false);
+                alert("Sorry, could not get programmes for '" + selectedLetter() +"', other information:\n" + errorMessage);
+            });
     };
     return {
         displayName: 'Programmes',
         images: ko.observableArray([]),
         letters: ds.requestKeys(),
         selectedLetter: selectedLetter,
+        selectedPage: selectedPage,
         apiSource: apiSource,
         programmes: programmes,
         pageNumbers: pageNumbers,
         activate: function () {
             apiSource(interactor.getApiName());
-            getProgrammes(selectedLetter(), "1");
-            //the router's activator calls this function and waits for it to complete before proceding
-            if (this.images().length > 0) {
-                return;
-            }
-
-            var that = this;
-            return http.jsonp('http://api.flickr.com/services/feeds/photos_public.gne', { tags: 'mount ranier', tagmode: 'any', format: 'json' }, 'jsoncallback').then(function(response) {
-                that.images(response.items);
-            });
+            getProgrammes();
         },
-        selectLetter: function(letter) {
-            //the app model allows easy display of modal dialogs by passing a view model
-            //views are usually located by convention, but you an specify it as well with viewUrl
-            getProgrammes(letter, "1");
-            selectedLetter(letter);
-        },
+        
         selectPage: function (page) {
             //the app model allows easy display of modal dialogs by passing a view model
             //views are usually located by convention, but you an specify it as well with viewUrl
-            getProgrammes(selectedLetter(), page);
+            selectedPage(page);
+            getProgrammes();
             
-        },
-        canDeactivate: function () {
-            //the router's activator calls this function to see if it can leave the screen
-            return app.showMessage('Are you sure you want to leave this page?', 'Navigate', ['Yes', 'No']);
         }
+       
     };
 });
